@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack — Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<nav>
+    <div class="brand"> MediTrack</div>
+    <div class="nav-links">
+        <span id="adminName" class="nav-user"></span>
+        <form action="/logout" method="POST" style="display:inline">
+            <button type="submit" class="btn-logout">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="dashboard-layout">
+
+    
+    <div class="sidebar">
+        <ul>
+            <li class="active"> Dashboard</li>
+            <li> Patients</li>
+            <li> Appointments</li>
+            <li> Doctors</li>
+            <li> Records</li>
+        </ul>
+    </div>
+
+   
+    <div class="main-content">
+        <h2>Dashboard Overview</h2>
+
+        
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-num" id="totalPatients">--</div>
+                <div class="stat-label">Total Patients</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">5</div>
+                <div class="stat-label">Doctors Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">8</div>
+                <div class="stat-label">Appointments Today</div>
+            </div>
+        </div>
+
+       
+        <div class="table-card">
+            <h3>Registered Patients</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="patientsBody">
+                    <tr>
+                        <td colspan="6" style="text-align:center">
+                            Loading...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

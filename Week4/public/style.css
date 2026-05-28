@@ -1,0 +1,58 @@
+/* MediTrack Week 4 Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; background: #C1E8FF; color: #021024; }
+
+/* Login Page */
+.login-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #021024; }
+.login-wrapper { width: 100%; max-width: 400px; padding: 1rem; }
+.login-card { background: white; border-radius: 12px; padding: 2.5rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3); text-align: center; }
+.login-logo { font-size: 3rem; margin-bottom: 0.5rem; }
+.login-card h1 { font-size: 1.8rem; font-weight: 700; color: #021024; margin-bottom: 0.25rem; }
+.login-sub { color: #7DA0CA; font-size: 0.85rem; margin-bottom: 1.5rem; }
+.login-card h2 { font-size: 1.1rem; font-weight: 600; color: #052659; margin-bottom: 1.5rem; text-align: left; }
+
+/* Navbar */
+nav { background: #021024; padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+.brand { color: white; font-size: 1.2rem; font-weight: 700; }
+.nav-links { display: flex; gap: 1rem; align-items: center; }
+.nav-user { color: #7DA0CA; font-size: 0.85rem; }
+.btn-logout { background: #e63946; color: white; border: none; padding: 0.4rem 1rem; border-radius: 4px; font-family: 'Poppins', sans-serif; font-size: 0.85rem; cursor: pointer; }
+
+/* Dashboard Layout */
+.dashboard-layout { display: flex; min-height: calc(100vh - 60px); }
+.sidebar { width: 220px; background: #052659; padding: 1.5rem 0; }
+.sidebar ul { list-style: none; }
+.sidebar ul li { padding: 0.85rem 1.5rem; color: #7DA0CA; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+.sidebar ul li:hover, .sidebar ul li.active { background: #021024; color: white; }
+.main-content { flex: 1; padding: 2rem; }
+.main-content h2 { font-size: 1.4rem; font-weight: 600; color: #052659; margin-bottom: 1.5rem; }
+
+/* Stats */
+.stats-row { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.stat-card { background: white; border-radius: 10px; padding: 1.2rem 1.5rem; min-width: 150px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+.stat-num { font-size: 2rem; font-weight: 700; color: #052659; }
+.stat-label { font-size: 0.78rem; color: #7DA0CA; }
+
+/* Table */
+.table-card { background: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+.table-card h3 { font-size: 1rem; font-weight: 600; color: #052659; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; }
+thead { background: #052659; color: white; }
+th { padding: 0.7rem 1rem; text-align: left; font-size: 0.82rem; }
+td { padding: 0.65rem 1rem; border-bottom: 1px solid #C1E8FF; font-size: 0.85rem; }
+tr:hover td { background: #f0f8ff; }
+
+/* Forms */
+.form-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; text-align: left; }
+.form-group label { font-size: 0.82rem; font-weight: 500; color: #052659; }
+.form-group input { padding: 0.55rem 0.9rem; border: 1.5px solid #7DA0CA; border-radius: 6px; font-family: 'Poppins', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
+.form-group input:focus { border-color: #052659; }
+.error { color: #e63946; font-size: 0.78rem; }
+.error-msg { color: #e63946; font-size: 0.85rem; margin-bottom: 0.75rem; min-height: 20px; }
+
+/* Buttons */
+.btn-primary { background: #052659; color: white; border: none; padding: 0.65rem 1.5rem; border-radius: 6px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+.btn-primary:hover { background: #021024; }
+.full-width { width: 100%; }
