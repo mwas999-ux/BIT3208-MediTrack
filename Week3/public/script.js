@@ -1,48 +1,59 @@
+// ── Password visibility toggle ──────────────────────────────────
+document.getElementById('togglePassword').addEventListener('click', function () {
+    const input = document.getElementById('password');
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    this.textContent = isHidden ? '🙈' : '👁';
+});
 
-function showAlert() {
-    alert('Hello from MediTrack! This is a JavaScript alert.');
-}
+// ── Password strength checker ───────────────────────────────────
+document.getElementById('password').addEventListener('input', function () {
+    const password = this.value;
+    const fill     = document.getElementById('strengthFill');
+    const text     = document.getElementById('strengthText');
 
-function changeText() {
-    const textEl = document.getElementById('demo-text');
-    textEl.textContent = '✅ Text changed dynamically using JavaScript DOM manipulation!';
-    textEl.style.color = '#052659';
-    textEl.style.fontWeight = '600';
-}
+    let strength = 0;
+    if (password.length >= 6)            strength++;
+    if (password.match(/[A-Z]/))         strength++;
+    if (password.match(/[0-9]/))         strength++;
+    if (password.match(/[^A-Za-z0-9]/))  strength++;
 
+    const levels = [
+        { width: '0%',   color: '#e0e0e0', label: '' },
+        { width: '25%',  color: '#e63946', label: 'Weak' },
+        { width: '50%',  color: '#f4a261', label: 'Fair' },
+        { width: '75%',  color: '#2a9d8f', label: 'Good' },
+        { width: '100%', color: '#2d6a4f', label: 'Strong' },
+    ];
 
-function toggleBox() {
-    const box = document.getElementById('toggle-box');
-    if (box.style.display === 'none') {
-        box.style.display = 'block';
-    } else {
-        box.style.display = 'none';
-    }
-}
+    fill.style.width      = levels[strength].width;
+    fill.style.background = levels[strength].color;
+    text.textContent      = levels[strength].label;
+    text.style.color      = levels[strength].color;
+});
 
-
-
-document.getElementById('patientForm').addEventListener('submit', function(e) {
+// ── Form submit & validation ────────────────────────────────────
+document.getElementById('patientForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    
-    document.getElementById('nameError').textContent   = '';
-    document.getElementById('ageError').textContent    = '';
-    document.getElementById('genderError').textContent = '';
-    document.getElementById('phoneError').textContent  = '';
-    document.getElementById('emailError').textContent  = '';
-    document.getElementById('successMsg').textContent  = '';
+    // Clear previous errors
+    ['nameError','ageError','genderError','phoneError','emailError','passwordError'].forEach(id => {
+        document.getElementById(id).textContent = '';
+    });
+    const successMsg = document.getElementById('successMsg');
+    successMsg.textContent = '';
+    successMsg.className = 'success-msg';
 
     const fullname = document.getElementById('fullname').value.trim();
     const age      = document.getElementById('age').value.trim();
     const gender   = document.getElementById('gender').value;
     const phone    = document.getElementById('phone').value.trim();
     const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
 
     let isValid = true;
 
-    
-    if (fullname === '') {
+    if (!fullname) {
         document.getElementById('nameError').textContent = 'Full name is required';
         isValid = false;
     } else if (fullname.length < 3) {
@@ -50,24 +61,21 @@ document.getElementById('patientForm').addEventListener('submit', function(e) {
         isValid = false;
     }
 
-    
-    if (age === '') {
+    if (!age) {
         document.getElementById('ageError').textContent = 'Age is required';
         isValid = false;
     } else if (age < 1 || age > 120) {
-        document.getElementById('ageError').textContent = 'Enter a valid age (1-120)';
+        document.getElementById('ageError').textContent = 'Enter a valid age (1–120)';
         isValid = false;
     }
 
-    
-    if (gender === '') {
+    if (!gender) {
         document.getElementById('genderError').textContent = 'Please select a gender';
         isValid = false;
     }
 
-    
     const phoneRegex = /^07\d{8}$/;
-    if (phone === '') {
+    if (!phone) {
         document.getElementById('phoneError').textContent = 'Phone number is required';
         isValid = false;
     } else if (!phoneRegex.test(phone)) {
@@ -75,9 +83,8 @@ document.getElementById('patientForm').addEventListener('submit', function(e) {
         isValid = false;
     }
 
-    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === '') {
+    if (!email) {
         document.getElementById('emailError').textContent = 'Email is required';
         isValid = false;
     } else if (!emailRegex.test(email)) {
@@ -85,34 +92,47 @@ document.getElementById('patientForm').addEventListener('submit', function(e) {
         isValid = false;
     }
 
-    
-    if (isValid) {
-        fetch('/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({ fullname, age, gender, phone, email })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('successMsg').textContent = ' ' + data.message;
-                document.getElementById('patientForm').reset();
-                loadPatients();
-            } else {
-                document.getElementById('successMsg').textContent = ' ' + data.message;
-            }
-        });
+    if (!password) {
+        document.getElementById('passwordError').textContent = 'Password is required';
+        isValid = false;
+    } else if (password.length < 6) {
+        document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+        isValid = false;
     }
+
+    if (!isValid) return;
+
+    fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullname, age, gender, phone, email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        successMsg.textContent = data.success ? '✅ ' + data.message : '❌ ' + data.message;
+        successMsg.style.color = data.success ? '#2d6a4f' : '#e63946';
+        if (data.success) {
+            document.getElementById('patientForm').reset();
+            document.getElementById('strengthFill').style.width = '0%';
+            document.getElementById('strengthText').textContent = '';
+            loadPatients();
+        }
+    })
+    .catch(() => {
+        successMsg.textContent = '❌ Network error. Please try again.';
+        successMsg.style.color = '#e63946';
+    });
 });
 
-
-
+// ── Load patients table ─────────────────────────────────────────
 function loadPatients() {
+    const tbody = document.getElementById('patientsBody');
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">Loading...</td></tr>';
+
     fetch('/patients')
     .then(res => res.json())
     .then(patients => {
-        const tbody = document.getElementById('patientsBody');
-        if (patients.length === 0) {
+        if (!patients.length) {
             tbody.innerHTML = '<tr><td colspan="6" style="text-align:center">No patients registered yet</td></tr>';
             return;
         }
@@ -126,5 +146,8 @@ function loadPatients() {
                 <td>${p.email}</td>
             </tr>
         `).join('');
+    })
+    .catch(() => {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:red">Failed to load patients</td></tr>';
     });
 }

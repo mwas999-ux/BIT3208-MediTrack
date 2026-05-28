@@ -14,12 +14,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+
 app.post('/register', (req, res) => {
-    const { fullname, age, gender, phone, email } = req.body;
+    const { fullname, age, gender, phone, email, password } = req.body;
 
     db.query(
-        'INSERT INTO patients (fullname, age, gender, phone, email) VALUES (?, ?, ?, ?, ?)',
-        [fullname, age, gender, phone, email],
+        'INSERT INTO patients (fullname, age, gender, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)',
+        [fullname, age, gender, phone, email, password],
         (err, result) => {
             if (err) {
                 console.log(err);

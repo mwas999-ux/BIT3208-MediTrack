@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -9,7 +8,7 @@ body {
     color: #021024;
 }
 
-
+/* NAV */
 nav {
     background: #021024;
     padding: 0 2rem;
@@ -26,7 +25,7 @@ nav {
 .nav-links a { color: #7DA0CA; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
 .nav-links a:hover { color: white; }
 
-
+/* HERO */
 .hero {
     background: #052659;
     color: white;
@@ -36,10 +35,10 @@ nav {
 .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
 .hero p { color: #7DA0CA; font-size: 0.95rem; }
 
-/* Container */
+/* CONTAINER */
 .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-
+/* CARDS */
 .section-card {
     background: white;
     border-radius: 10px;
@@ -56,30 +55,7 @@ nav {
     border-bottom: 2px solid #C1E8FF;
 }
 
-
-.demo-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
-.btn-demo {
-    background: #5483B3;
-    color: white;
-    border: none;
-    padding: 0.5rem 1.2rem;
-    border-radius: 6px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.88rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.btn-demo:hover { background: #052659; }
-.toggle-box {
-    margin-top: 1rem;
-    background: #C1E8FF;
-    padding: 1rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: #052659;
-}
-
-
+/* FORM */
 .form-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
 .form-group label { font-size: 0.82rem; font-weight: 500; color: #052659; }
 .form-group input, .form-group select {
@@ -93,9 +69,51 @@ nav {
 }
 .form-group input:focus, .form-group select:focus { border-color: #052659; }
 .error { color: #e63946; font-size: 0.78rem; min-height: 16px; }
-.success-msg { color: #2d6a4f; font-size: 0.88rem; margin-top: 0.75rem; font-weight: 500; }
+.success-msg { font-size: 0.88rem; margin-top: 0.75rem; font-weight: 500; }
 
+/* PASSWORD WRAPPER */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem;
+}
+.toggle-password {
+    position: absolute;
+    right: 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    user-select: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.toggle-password:hover { opacity: 1; }
 
+/* STRENGTH BAR */
+.strength-bar {
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    transition: width 0.3s, background 0.3s;
+}
+.strength-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+/* BUTTONS */
 .btn-primary {
     background: #052659;
     color: white;
@@ -107,8 +125,11 @@ nav {
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
+    width: 100%;
+    margin-top: 0.5rem;
 }
 .btn-primary:hover { background: #021024; }
+
 .btn-secondary {
     background: #7DA0CA;
     color: white;
@@ -119,9 +140,11 @@ nav {
     font-size: 0.85rem;
     cursor: pointer;
     margin-bottom: 1rem;
+    transition: background 0.2s;
 }
+.btn-secondary:hover { background: #052659; }
 
-
+/* TABLE */
 table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
 thead { background: #052659; color: white; }
 th { padding: 0.7rem 1rem; text-align: left; font-size: 0.82rem; }
