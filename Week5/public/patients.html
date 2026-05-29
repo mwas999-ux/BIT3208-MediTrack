@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack — Patients</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+    <div class="brand"> MediTrack</div>
+    <div class="nav-links">
+        <form action="/logout" method="POST" style="display:inline">
+            <button type="submit" class="btn-logout">Logout</button>
+        </form>
+    </div>
+</nav>
+<div class="dashboard-layout">
+    <div class="sidebar">
+        <ul>
+            <li onclick="location.href='/dashboard'">📊 Dashboard</li>
+            <li class="active" onclick="location.href='/patients'">👥 Patients</li>
+            <li onclick="location.href='/doctors'">👨‍⚕️ Doctors</li>
+            <li onclick="location.href='/appointments'">📅 Appointments</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>Patient Management</h2>
+
+        <!-- Add Patient Form -->
+        <div class="form-card">
+            <h3>Add New Patient</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullname" placeholder="Enter full name">
+                    <span class="error" id="nameError"></span>
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" id="age" placeholder="Enter age">
+                    <span class="error" id="ageError"></span>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select id="gender">
+                        <option value="">Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span class="error" id="genderError"></span>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="phone" placeholder="07XXXXXXXX">
+                    <span class="error" id="phoneError"></span>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="example@email.com">
+                    <span class="error" id="emailError"></span>
+                </div>
+            </div>
+            <button onclick="addPatient()" class="btn-primary" style="margin-top:1rem">Add Patient</button>
+            <div id="patientMsg" class="success-msg"></div>
+        </div>
+
+        <!-- Patients Table -->
+        <div class="table-card">
+            <h3>All Patients</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="patientsBody">
+                    <tr><td colspan="7" style="text-align:center">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="editModal" class="modal" style="display:none">
+            <div class="modal-card">
+                <h3>Edit Patient</h3>
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="editFullname">
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" id="editAge">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select id="editGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="editPhone">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editEmail">
+                </div>
+                <div style="display:flex; gap:1rem; margin-top:1rem">
+                    <button onclick="updatePatient()" class="btn-primary">Update</button>
+                    <button onclick="closeModal()" class="btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="patients.js"></script>
+</body>
+</html>

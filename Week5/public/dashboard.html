@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack — Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+    <div class="brand">🏥 MediTrack</div>
+    <div class="nav-links">
+        <span id="adminName" class="nav-user"></span>
+        <form action="/logout" method="POST" style="display:inline">
+            <button type="submit" class="btn-logout">Logout</button>
+        </form>
+    </div>
+</nav>
+<div class="dashboard-layout">
+    <div class="sidebar">
+        <ul>
+            <li class="active" onclick="location.href='/dashboard'">📊 Dashboard</li>
+            <li onclick="location.href='/patients'">👥 Patients</li>
+            <li onclick="location.href='/doctors'">👨 Doctors</li>
+            <li onclick="location.href='/appointments'">📅 Appointments</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>Dashboard Overview</h2>
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-num" id="totalPatients">--</div>
+                <div class="stat-label">Total Patients</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" id="totalDoctors">--</div>
+                <div class="stat-label">Doctors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num" id="totalAppointments">--</div>
+                <div class="stat-label">Appointments</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="dashboard.js"></script>
+</body>
+</html>

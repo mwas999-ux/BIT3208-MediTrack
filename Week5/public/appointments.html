@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack — Appointments</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+    <div class="brand">🏥 MediTrack</div>
+    <div class="nav-links">
+        <form action="/logout" method="POST" style="display:inline">
+            <button type="submit" class="btn-logout">Logout</button>
+        </form>
+    </div>
+</nav>
+<div class="dashboard-layout">
+    <div class="sidebar">
+        <ul>
+            <li onclick="location.href='/dashboard'">📊 Dashboard</li>
+            <li onclick="location.href='/patients'">👥 Patients</li>
+            <li onclick="location.href='/doctors'">👨‍⚕️ Doctors</li>
+            <li class="active" onclick="location.href='/appointments'">📅 Appointments</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>Appointment Management</h2>
+
+        <!-- Book Appointment Form -->
+        <div class="form-card">
+            <h3>Book New Appointment</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Patient</label>
+                    <select id="patientId"></select>
+                </div>
+                <div class="form-group">
+                    <label>Doctor</label>
+                    <select id="doctorId"></select>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="apptDate">
+                </div>
+                <div class="form-group">
+                    <label>Time</label>
+                    <input type="time" id="apptTime">
+                </div>
+                <div class="form-group">
+                    <label>Reason</label>
+                    <input type="text" id="apptReason" placeholder="Reason for visit">
+                </div>
+            </div>
+            <button onclick="bookAppointment()" class="btn-primary" style="margin-top:1rem">Book Appointment</button>
+            <div id="apptMsg" class="success-msg"></div>
+        </div>
+
+        <!-- Appointments Table -->
+        <div class="table-card">
+            <h3>All Appointments</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentsBody">
+                    <tr><td colspan="8" style="text-align:center">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="appointments.js"></script>
+</body>
+</html>

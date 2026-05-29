@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack — Doctors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+    <div class="brand">🏥 MediTrack</div>
+    <div class="nav-links">
+        <form action="/logout" method="POST" style="display:inline">
+            <button type="submit" class="btn-logout">Logout</button>
+        </form>
+    </div>
+</nav>
+<div class="dashboard-layout">
+    <div class="sidebar">
+        <ul>
+            <li onclick="location.href='/dashboard'">📊 Dashboard</li>
+            <li onclick="location.href='/patients'">👥 Patients</li>
+            <li class="active" onclick="location.href='/doctors'">👨‍⚕️ Doctors</li>
+            <li onclick="location.href='/appointments'">📅 Appointments</li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>Doctor Management</h2>
+
+        <!-- Add Doctor Form -->
+        <div class="form-card">
+            <h3>Add New Doctor</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="docFullname" placeholder="Dr. Full Name">
+                </div>
+                <div class="form-group">
+                    <label>Specialization</label>
+                    <input type="text" id="docSpec" placeholder="e.g. Cardiologist">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="docPhone" placeholder="07XXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="docEmail" placeholder="doctor@email.com">
+                </div>
+            </div>
+            <button onclick="addDoctor()" class="btn-primary" style="margin-top:1rem">Add Doctor</button>
+            <div id="doctorMsg" class="success-msg"></div>
+        </div>
+
+        <!-- Doctors Table -->
+        <div class="table-card">
+            <h3>All Doctors</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Specialization</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="doctorsBody">
+                    <tr><td colspan="6" style="text-align:center">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="doctors.js"></script>
+</body>
+</html>
